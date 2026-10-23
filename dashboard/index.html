@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expanding Cycle Networks</title>
+<link rel="stylesheet" href="lib/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>Expanding cycle networks with Low Traffic Neighbourhoods</h1>
+    <select id="place" class="placesel" aria-label="Place"></select>
+  </div>
+  <div class="controls">
+    <label>Strategy <select id="strategy"></select></label>
+    <button id="theme" class="btn">Dark mode</button>
+    <button id="togglePanel" class="btn" aria-pressed="true">Hide dashboard</button>
+  </div>
+</header>
+
+<main class="layout" id="layout">
+  <section class="mapwrap">
+    <div id="map" aria-label="Map of the growing network"></div>
+
+    <div class="mapcard layers" id="layersCard">
+      <div class="cardhead"><strong>Map</strong><button class="linkbtn" id="collapseLayers" aria-expanded="true">hide</button></div>
+      <div id="layersBody">
+        <fieldset>
+          <legend>Growth links</legend>
+          <label><input type="checkbox" id="lyAbstract" checked> Abstract links</label>
+          <label><input type="checkbox" id="lyRouted" checked> Routed links</label>
+          <label><input type="checkbox" id="lyFuture"> Show not-yet-built links faintly</label>
+        </fieldset>
+        <fieldset>
+          <legend>Colour links by</legend>
+          <label><input type="radio" name="colorMode" value="order" checked> Build order</label>
+          <label><input type="radio" name="colorMode" value="invest"> New vs existing infrastructure</label>
+        </fieldset>
+        <fieldset>
+          <legend>Context</legend>
+          <label><input type="checkbox" id="lyLtn" checked> LTN neighbourhoods</label>
+          <label><input type="checkbox" id="lyBike" checked> Existing cycle infrastructure</label>
+          <label><input type="checkbox" id="lySeeds" checked> Seed points</label>
+          <label><input type="checkbox" id="lyExits"> LTN exit points</label>
+        </fieldset>
+        <div class="maplegend" id="mapLegend"></div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <button class="btn icon" id="play" aria-label="Play">&#9654;</button>
+      <button class="btn icon" id="prev" aria-label="Previous stage">&#8249;</button>
+      <input type="range" id="stage" min="0" max="100" value="0" step="1" aria-label="Growth stage">
+      <button class="btn icon" id="next" aria-label="Next stage">&#8250;</button>
+      <div class="stagelabel"><span class="big" id="stageNum">0</span><span class="muted"> / <span id="stageMax">100</span></span></div>
+      <label class="speed">Speed
+        <select id="speed"><option value="900">Slow</option><option value="400" selected>Normal</option><option value="120">Fast</option></select>
+      </label>
+    </div>
+  </section>
+
+  <aside class="panel" id="panel">
+    <div class="tiles" id="tiles"></div>
+
+    <div class="card">
+      <div class="charthead">
+        <label class="grow">Chart <select id="metric"></select></label>
+        <label class="inline"><input type="checkbox" id="showRandom" checked> Random baseline</label>
+      </div>
+      <div class="charthead" id="devRow" hidden>
+        <span class="seg" role="radiogroup" aria-label="Chart values">
+          <label><input type="radio" name="devMode" value="abs" checked> Absolute</label>
+          <label><input type="radio" name="devMode" value="dev"> vs random baseline</label>
+        </span>
+      </div>
+      <div class="chartbox"><canvas id="chart" aria-label="Metric over growth stages"></canvas></div>
+      <p class="note" id="metricNote"></p>
+    </div>
+
+    <p class="note">Tip: click any link on the map to see when it was added. Keys: &larr; &rarr; step, space plays, Home/End jump.</p>
+  </aside>
+</main>
+
+<script src="lib/leaflet.min.js"></script>
+<script src="lib/chart.umd.min.js"></script>
+<script src="config.js"></script>
+<script src="data/manifest.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

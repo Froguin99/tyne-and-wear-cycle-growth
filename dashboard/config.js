@@ -1,0 +1,1 @@
+window.CARTO_API_KEY = "cb1_3xnx_1_969c752679d5880df4a1000c";

@@ -1,0 +1,31 @@
+{
+ "key": "sunderland",
+ "label": "Sunderland",
+ "boundary": "sunderland/boundary.js",
+ "scenarios": [
+  {
+   "key": "current_ltn_scenario",
+   "label": "Current LTNs",
+   "runs": [
+    {
+     "key": "betweenness",
+     "file": "sunderland/run__current_ltn_scenario__betweenness.js"
+    },
+    {
+     "key": "demand",
+     "file": "sunderland/run__current_ltn_scenario__demand.js"
+    },
+    {
+     "key": "betweenness_ltn_priority",
+     "file": "sunderland/run__current_ltn_scenario__betweenness_ltn_priority.js"
+    },
+    {
+     "key": "demand_ltn_priority",
+     "file": "sunderland/run__current_ltn_scenario__demand_ltn_priority.js"
+    }
+   ],
+   "metrics": "sunderland/metrics__current_ltn_scenario.js",
+   "context": "sunderland/context__current_ltn_scenario.js"
+  }
+ ]
+}
